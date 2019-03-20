@@ -14,19 +14,12 @@ import java.net.URL
 
 class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
-    var nivoseURLfromZone: String? = null
-    var nivoseGifURL: String? = null
-    var zones: Array<String>? = null
-    var zonePlaceholder: String? = null
-    var zoneNamePrefix: String? = null
-
     var nivoses: MutableList<Nivose> = ArrayList()
     var nivoseListAdapter = NivosesListAdapter(nivoses)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadProperties()
 
         swipeRefreshLayout.setOnRefreshListener(this)
 
@@ -37,9 +30,10 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
     private fun fetchNivosesImagesURLs(): List<Nivose> {
         val nivoses: MutableList<Nivose> = ArrayList()
+        var zones: Array<String>? = resources.getStringArray(R.array.zones)
         for (zone in zones!!) {
-            val url: String = nivoseURLfromZone!!.replace(zonePlaceholder!!, zoneNamePrefix + zone)
-            nivoses.add(Nivose(zone, nivoseGifURL + URL(url).readText().removeSurrounding("\"")))
+            val url: String = getString(R.string.nivose_by_zone_url, zone)
+            nivoses.add(Nivose(zone,  getString(R.string.nivose_gif_url) + URL(url).readText().removeSurrounding("\"")))
         }
 
         nivoseListAdapter.updateList(nivoses)
@@ -57,14 +51,6 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
                 swipeRefreshLayout.isRefreshing = false
             }
         }.get()
-    }
-
-    private fun loadProperties() {
-        nivoseURLfromZone = getString(R.string.nivose_by_zone_url)
-        nivoseGifURL = getString(R.string.nivose_gif_url)
-        zones = resources.getStringArray(R.array.zones)
-        zonePlaceholder = getString(R.string.zone_placeholder)
-        zoneNamePrefix = getString(R.string.zone_name_prefix)
     }
 
     private fun initRecyclerView() {
