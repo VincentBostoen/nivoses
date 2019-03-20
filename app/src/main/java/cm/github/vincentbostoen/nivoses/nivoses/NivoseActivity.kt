@@ -66,8 +66,8 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
     private fun initRecyclerView() {
         val mLayoutManager = LinearLayoutManager(applicationContext)
-        recyclerView.setLayoutManager(mLayoutManager)
-        recyclerView.setItemAnimator(DefaultItemAnimator())
-        recyclerView.setAdapter(nivoseListAdapter)
+        recyclerView.layoutManager = mLayoutManager
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.adapter = nivoseListAdapter
     }
 }
