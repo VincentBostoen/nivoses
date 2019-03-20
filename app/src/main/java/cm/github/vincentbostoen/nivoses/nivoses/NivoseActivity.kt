@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.doAsyncResult
 import org.jetbrains.anko.onComplete
 import java.net.URL
@@ -31,9 +32,7 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
         initRecyclerView()
 
-        doAsyncResult {
-            fetchNivosesImagesURLs()
-        }.get()
+        fetchNivoses()
     }
 
     private fun fetchNivosesImagesURLs(): List<Nivose> {
@@ -48,11 +47,15 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
     }
 
     override fun onRefresh() {
-        doAsyncResult {
+        fetchNivoses()
+    }
+
+    private fun fetchNivoses() {
+        doAsync {
+            fetchNivosesImagesURLs()
             onComplete {
                 swipeRefreshLayout.isRefreshing = false
             }
-            fetchNivosesImagesURLs()
         }.get()
     }
 
