@@ -34,8 +34,8 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
             nivoses.add(Nivose(zone,  getString(R.string.nivose_gif_url) + URL(url).readText().removeSurrounding("\"")))
         }
 
-        nivoseListAdapter.updateList(nivoses)
         return nivoses
+
     }
 
     override fun onRefresh() {
@@ -44,8 +44,9 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
     private fun fetchNivoses(zones: Array<String>) {
         doAsync {
-            fetchNivosesImagesURLs(zones)
+            val nivosesImagesURLs = fetchNivosesImagesURLs(zones)
             onComplete {
+                nivoseListAdapter.updateList(nivosesImagesURLs)
                 swipeRefreshLayout.isRefreshing = false
             }
         }.get()
