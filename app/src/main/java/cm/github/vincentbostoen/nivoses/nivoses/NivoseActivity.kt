@@ -7,7 +7,6 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.doAsyncResult
 import org.jetbrains.anko.onComplete
 import java.net.URL
 
@@ -25,12 +24,11 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
 
         initRecyclerView()
 
-        fetchNivoses()
+        fetchNivoses(resources.getStringArray(R.array.zones))
     }
 
-    private fun fetchNivosesImagesURLs(): List<Nivose> {
+    private fun fetchNivosesImagesURLs(zones: Array<String>): List<Nivose> {
         val nivoses: MutableList<Nivose> = ArrayList()
-        var zones: Array<String>? = resources.getStringArray(R.array.zones)
         for (zone in zones!!) {
             val url: String = getString(R.string.nivose_by_zone_url, zone)
             nivoses.add(Nivose(zone,  getString(R.string.nivose_gif_url) + URL(url).readText().removeSurrounding("\"")))
@@ -41,12 +39,12 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
     }
 
     override fun onRefresh() {
-        fetchNivoses()
+        fetchNivoses(resources.getStringArray(R.array.zones))
     }
 
-    private fun fetchNivoses() {
+    private fun fetchNivoses(zones: Array<String>) {
         doAsync {
-            fetchNivosesImagesURLs()
+            fetchNivosesImagesURLs(zones)
             onComplete {
                 swipeRefreshLayout.isRefreshing = false
             }
