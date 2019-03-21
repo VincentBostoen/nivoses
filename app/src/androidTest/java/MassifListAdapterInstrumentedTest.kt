@@ -22,7 +22,7 @@ class MassifListAdapterInstrumentedTest {
 
     @Test
     fun holder_holds_a_textview() {
-        val massifListAdapter = MassifListAdapter(ArrayList())
+        val massifListAdapter = MassifListAdapter()
 
         val viewHolder = massifListAdapter.onCreateViewHolder(ViewGroupForTests(appContext), 42)
 
@@ -31,7 +31,7 @@ class MassifListAdapterInstrumentedTest {
 
     @Test
     fun massif_name_is_bound_into_text_content() {
-        val massifListAdapter = MassifListAdapter(arrayListOf("Corsica", "Ariège"))
+        val massifListAdapter = MassifListAdapter()
 
         val itemView = TextView(appContext)
         massifListAdapter.onBindViewHolder(MassifListAdapter.MassifViewHolder(itemView), 1)

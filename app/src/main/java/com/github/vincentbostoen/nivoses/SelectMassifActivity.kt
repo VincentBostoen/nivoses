@@ -13,7 +13,7 @@ class SelectMassifActivity : AppCompatActivity() {
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         massif_list.layoutManager = mLayoutManager
-        massif_list.adapter = MassifListAdapter(arrayListOf("Chartreuse", "Vercors", "Belledonne","Taillefer"))
+        massif_list.adapter = MassifListAdapter()
     }
 
 

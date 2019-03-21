@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class MassifListAdapter(val massifList: ArrayList<String>) :
-    RecyclerView.Adapter<MassifListAdapter.MassifViewHolder>() {
+class MassifListAdapter(val massifList : Array<Massif> = Massif.values()) :
+    RecyclerView.Adapter<MassifListAdapter.MassifViewHolder<TextView>>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MassifViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MassifViewHolder<TextView> {
         return MassifViewHolder(TextView(parent.context))
     }
 
@@ -16,9 +16,9 @@ class MassifListAdapter(val massifList: ArrayList<String>) :
         return massifList.size
     }
 
-    override fun onBindViewHolder(viewHolder: MassifViewHolder, position: Int) {
-        (viewHolder.itemView as TextView).text = massifList[position]
+    override fun onBindViewHolder(viewHolder: MassifViewHolder<TextView>, position: Int) {
+        (viewHolder.itemView as TextView).text = Massif.values()[position].massif
     }
 
-    class MassifViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class MassifViewHolder<T : View>(itemView: T) : RecyclerView.ViewHolder(itemView)
 }
