@@ -1,10 +1,11 @@
-package cm.github.vincentbostoen.nivoses.nivoses
+package com.github.vincentbostoen.nivoses
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import com.github.vincentbostoen.nivoses.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.onComplete
@@ -31,7 +32,14 @@ class NivoseActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener
         val nivoses: MutableList<Nivose> = ArrayList()
         for (zone in zones!!) {
             val url: String = getString(R.string.nivose_by_zone_url, zone)
-            nivoses.add(Nivose(zone,  getString(R.string.nivose_gif_url) + URL(url).readText().removeSurrounding("\"")))
+            nivoses.add(
+                Nivose(
+                    zone,
+                    getString(R.string.nivose_gif_url) + URL(url).readText().removeSurrounding(
+                        "\""
+                    )
+                )
+            )
         }
 
         return nivoses

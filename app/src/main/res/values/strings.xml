@@ -6,7 +6,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="nivose_by_zone_url">https://www.meteofrance.com/mf3-rpc-portlet/rest/relevemontagne/releve/ZONE_%1$s/type/imgnivose7j</string>
+    <string name="nivose_by_zone_url">
+        https://www.meteofrance.com/mf3-rpc-portlet/rest/relevemontagne/releve/ZONE_%1$s/type/imgnivose7j
+    </string>
     <string name="nivose_gif_url">https://www.meteofrance.com/integration/sim-portail/</string>
     <string-array name="zones">
         <!--<item>BONNE</item>-->

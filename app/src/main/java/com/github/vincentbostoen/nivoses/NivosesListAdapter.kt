@@ -1,10 +1,12 @@
-package cm.github.vincentbostoen.nivoses.nivoses
+package com.github.vincentbostoen.nivoses
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.github.vincentbostoen.nivoses.GlideApp
+import com.github.vincentbostoen.nivoses.R
 
 class NivosesListAdapter(private val nivosesList: MutableList<Nivose>) :
     RecyclerView.Adapter<NivosesListAdapter.MyViewHolder>() {
